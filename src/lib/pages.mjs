@@ -144,7 +144,17 @@ function home() {
     </div>
   </div>
 </section>
-
+ <article class="package">
+        <p class="pk-tag">7–10 m²</p>
+        <h3>Suuri kylpyhuone</h3>
+        <h2>949 €</h2>
+        <p>Alkaen – puhdistus ja nanopinnoitus</p>
+        <a class="btn btn-outline btn-block"
+           href="#tarjous">Pyydä tarjous</a>
+      </article>
+    </div>
+  </div>
+</section>
 ${processBlock()}
 ${areaBlock()}
 ${faqBlock(homeFaq, { title: 'Hyvä tietää ennen tilausta', intro: 'Etkö löydä vastausta? Kysy rohkeasti tarjouspyynnön yhteydessä – vastaamme mielellämme.' })}
