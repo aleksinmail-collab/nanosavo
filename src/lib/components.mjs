@@ -146,7 +146,6 @@ export function header(page) {
       <li style="--i:3"><a href="/#ennen-jalkeen">Ennen &amp; jälkeen</a></li>
       <li style="--i:4"><a href="/#tyotapa">Näin toimimme</a></li>
       <li style="--i:5"><a href="/#ukk">Usein kysyttyä</a></li>
-      <li style="--i:6"><a href="/tarjouspyynto/">Tarjouspyyntö</a></li>
     </ul>
     <div class="mm-cta">
       <a class="btn btn-primary btn-lg" href="${ctaHref(page)}" data-close-menu>Pyydä maksuton tarjous ${icon.arrow}</a>
@@ -179,7 +178,6 @@ export function footer() {
   <div class="wrap">
     <div class="footer-cta">
       <p class="footer-cta-title">Kylpyhuone, joka <em>kiiltää</em> taas.</p>
-      <a class="btn btn-primary btn-lg" href="/tarjouspyynto/">Pyydä maksuton tarjous ${icon.arrow}</a>
     </div>
     <div class="footer-grid">
       <div class="footer-brand">
@@ -189,7 +187,7 @@ export function footer() {
       </div>
       <div>
         <p class="footer-h">Palvelut</p>
-        <ul>${SERVICES.map((s) => `<li><a href="${s.path}">${s.nav} Kuopio</a></li>`).join('')}<li><a href="/tarjouspyynto/">Tarjouspyyntö</a></li></ul>
+        <ul>${SERVICES.map((s) => `<li><a href="${s.path}">${s.nav} Kuopio</a></li>`).join('')}</ul>
       </div>
       <div>
         <p class="footer-h">Palvelualue</p>
@@ -253,7 +251,6 @@ export function faqBlock(faqs, { title = 'Usein kysyttyä', eyebrow = 'Kysymykse
       <p class="eyebrow">${eyebrow}</p>
       <h2 id="${id}-title">${title}</h2>
       ${intro ? `<p class="muted">${intro}</p>` : ''}
-      <a class="link-arrow" href="#tarjous">Kysy suoraan tarjouspyynnöllä ${icon.arrow}</a>
     </div>
     <div class="faq-list">
       ${faqs.map((f, i) => `
@@ -342,14 +339,11 @@ export function trustStrip() {
 
 // ── tarjouslomake (Netlify Forms) ───────────────────────────
 export const SERVICE_OPTIONS = [
-  ['puhdistus-ja-nanopinnoitus', 'Puhdistus + nanopinnoitus', 'Suosituin'],
-  ['kylpyhuoneen-puhdistus', 'Kylpyhuoneen puhdistus', ''],
-  ['kalkinpoisto', 'Kalkinpoisto', ''],
-  ['nanopinnoitus', 'Nanopinnoitus', ''],
-  ['en-tieda', 'En osaa vielä sanoa', ''],
+  ['nanopinnoitus', 'Kylpyhuoneen nanopinnoitus', '', 'Vettä hylkivä suoja suihkulaseille, laatoille ja hanoille'],
+  ['kokonaispaketti', 'Siivous + nanopinnoitus + suihkusuodatin', 'Suosituin', 'Perusteellinen puhdistus, nanopinnoitus ja kalkkia poistava suihkusuodatin'],
 ]
 
-export function quoteForm({ selected = 'puhdistus-ja-nanopinnoitus' } = {}) {
+export function quoteForm({ selected = 'kokonaispaketti' } = {}) {
   return `
 <form class="quote-form" name="tarjouspyynto" method="POST" action="/kiitos/" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" data-quote-form>
   <input type="hidden" name="form-name" value="tarjouspyynto">
@@ -357,8 +351,8 @@ export function quoteForm({ selected = 'puhdistus-ja-nanopinnoitus' } = {}) {
   <input type="hidden" name="lahde" value="" data-source>
   <fieldset class="field chips">
     <legend>Mitä tarvitset?</legend>
-    <div class="chip-row">
-      ${SERVICE_OPTIONS.map(([v, l, badge]) => `<label class="chip"><input type="radio" name="palvelu" value="${l}"${v === selected ? ' checked' : ''}><span>${l}${badge ? ` <em>${badge}</em>` : ''}</span></label>`).join('')}
+    <div class="chip-row chip-options">
+      ${SERVICE_OPTIONS.map(([v, l, badge, desc]) => `<label class="chip"><input type="radio" name="palvelu" value="${l}" required${v === selected ? ' checked' : ''}><span><b>${l}${badge ? ` <em>${badge}</em>` : ''}</b><small>${desc}</small></span></label>`).join('')}
     </div>
   </fieldset>
   <div class="form-row">

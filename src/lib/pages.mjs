@@ -19,9 +19,8 @@ const homeFaq = [
 ]
 
 const packages = [
-  { tag: 'Nopea raikastus', name: 'Kalkki pois', value: 'kalkinpoisto', text: 'Kohdennettu kalkinpoisto sinne, missä sitä eniten näkyy.', items: ['Suihkulasit ja -seinät', 'Hanat, suihkut ja allas', 'Kalkkitahrat laatoista', 'Lopputarkastus yhdessä'] },
-  { tag: 'Suosituin', name: 'Puhdas & suojattu', value: 'puhdistus-ja-nanopinnoitus', featured: true, text: 'Koko kylpyhuoneen perusteellinen puhdistus ja kestävä nanosuojaus. Paras lopputulos ja helpoin arki.', items: ['Kalkinpoisto koko tilasta', 'Saumojen ja laattojen syväpuhdistus', 'Lattiakaivo, WC ja kalusteet', 'Nanopinnoitus soveltuville pinnoille', 'Kirjalliset hoito-ohjeet'] },
-  { tag: 'Suojaa puhtaat pinnat', name: 'Lasit & laatat', value: 'nanopinnoitus', text: 'Kun kylpyhuone on jo siisti, mutta haluat sen myös pysyvän sellaisena.', items: ['Pintojen esipuhdistus', 'Suihkulasien nanopinnoitus', 'Seinälaattojen pinnoitus', 'Hoito-ohjeet'] },
+  { tag: 'Suojaa pinnat', name: 'Kylpyhuoneen nanopinnoitus', text: 'Näkymätön, vettä hylkivä suoja, jonka ansiosta kalkki ja lika tarttuvat heikommin.', items: ['Pintojen esipuhdistus', 'Suihkulasien nanopinnoitus', 'Laattojen ja hanojen pinnoitus', 'Kirjalliset hoito-ohjeet'] },
+  { tag: 'Suosituin', name: 'Siivous + nanopinnoitus + suihkusuodatin', featured: true, text: 'Koko kylpyhuoneen perusteellinen siivous, kestävä nanosuojaus ja kalkkia poistava suihkusuodatin. Paras lopputulos ja helpoin arki.', items: ['Kalkinpoisto ja syväpuhdistus koko tilasta', 'Saumat, lattiakaivo, WC ja kalusteet', 'Nanopinnoitus soveltuville pinnoille', 'Kalkkia poistava suihkusuodatin asennettuna', 'Kirjalliset hoito-ohjeet'] },
 ]
 
 function home() {
@@ -130,28 +129,16 @@ function home() {
     <div class="section-head center reveal">
       <p class="eyebrow">Palvelukokonaisuudet</p>
       <h2 id="paketit-title">Valitse sopiva kokonaisuus</h2>
-      <p class="muted">Hinta määräytyy kylpyhuoneen koon ja kunnon mukaan. Saat aina kiinteän hinnan ennen kuin mitään sovitaan.</p>
+      <p class="muted">Hinta määräytyy kylpyhuoneen koon ja kunnon mukaan. Valitse sopiva vaihtoehto alla olevasta tarjouslomakkeesta – saat kiinteän hinnan ennen kuin mitään sovitaan.</p>
     </div>
-    <div class="package-grid">
+    <div class="package-grid two">
       ${packages.map((p, i) => `
       <article class="package reveal${p.featured ? ' featured' : ''}" style="--d:${i * 100}ms">
         <p class="pk-tag">${p.featured ? icon.sparkle : ''}${p.tag}</p>
         <h3>${p.name}</h3>
         <p class="pk-text">${p.text}</p>
         <ul>${p.items.map((it) => `<li>${icon.check}${it}</li>`).join('')}</ul>
-        <a class="btn ${p.featured ? 'btn-primary' : 'btn-outline'} btn-block" href="#tarjous" data-select="${p.value}">Pyydä tarjous ${icon.arrow}</a>
       </article>`).join('')}
-    </div>
-  </div>
-</section>
- <article class="package">
-        <p class="pk-tag">7–10 m²</p>
-        <h3>Suuri kylpyhuone</h3>
-        <h2>949 €</h2>
-        <p>Alkaen – puhdistus ja nanopinnoitus</p>
-        <a class="btn btn-outline btn-block"
-           href="#tarjous">Pyydä tarjous</a>
-      </article>
     </div>
   </div>
 </section>
@@ -213,7 +200,6 @@ ${serviceHero({ eyebrow: cfg.eyebrow, title: cfg.h1, lead: cfg.lead, image: cfg.
       <p class="eyebrow">Ennen &amp; jälkeen</p>
       <h2 id="ba-title">${cfg.baTitle}</h2>
       <p class="muted">${cfg.baText}</p>
-      <a class="btn btn-primary" href="#tarjous">Haluan saman lopputuloksen ${icon.arrow}</a>
     </div>
     ${beforeAfter({ ...BA[cfg.ba], cls: 'reveal', sizes: '(min-width: 900px) 60vw, 100vw' })}
   </div>
@@ -293,7 +279,7 @@ const cleaning = () => servicePage({
   ],
   contactTitle: 'Pyydä tarjous kylpyhuoneen puhdistuksesta',
   contactText: 'Kerro kylpyhuoneen koko ja mikä siinä eniten harmittaa. Saat kiinteän hinta-arvion kylpyhuoneen puhdistuksesta Kuopiossa – maksutta ja ilman sitoumuksia.',
-  formSelect: 'kylpyhuoneen-puhdistus',
+  formSelect: 'kokonaispaketti',
 })
 
 // ══════════════════════════════════════════════════════════════
@@ -360,7 +346,7 @@ const descaling = () => servicePage({
   ],
   contactTitle: 'Pyydä tarjous kalkinpoistosta',
   contactText: 'Kerro, missä kalkkia on eniten – ja liitä mukaan kuva, jos voit. Saat kiinteän hinta-arvion kalkinpoistosta Kuopiossa nopeasti ja maksutta.',
-  formSelect: 'kalkinpoisto',
+  formSelect: 'kokonaispaketti',
 })
 
 // ══════════════════════════════════════════════════════════════
@@ -460,7 +446,7 @@ function quote() {
       <nav class="crumbs" aria-label="Murupolku"><ol><li><a href="/">Etusivu</a></li><li aria-current="page">Tarjouspyyntö</li></ol></nav>
       <p class="eyebrow eyebrow-light hero-in" style="--d:60ms">Maksuton &amp; sitoumukseton</p>
       <h1 id="page-title" class="hero-in" style="--d:140ms">Pyydä tarjous – <em>vie noin minuutin</em></h1>
-      <p class="hero-lead hero-in" style="--d:240ms">Kerro lyhyesti kylpyhuoneestasi. Lähetämme selkeän, kiinteän hinta-arvion kylpyhuoneen puhdistuksesta, kalkinpoistosta tai nanopinnoituksesta.</p>
+      <p class="hero-lead hero-in" style="--d:240ms">Kerro lyhyesti kylpyhuoneestasi. Valitse kylpyhuoneen nanopinnoitus tai kokonaispaketti (siivous, nanopinnoitus ja kalkkia poistava suihkusuodatin), niin lähetämme selkeän, kiinteän hinta-arvion.</p>
       <ol class="mini-steps hero-in" style="--d:340ms">
         <li><span>1</span>Täytä lomake ja liitä kuva</li>
         <li><span>2</span>Saat kiinteän hinta-arvion</li>

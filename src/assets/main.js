@@ -80,13 +80,6 @@
     demo.observe(fig)
   })
 
-  // ── palvelupaketin valinta → lomake ──────────────────────
-  $$('[data-select]').forEach((btn) => btn.addEventListener('click', () => {
-    const map = { 'puhdistus-ja-nanopinnoitus': 'Puhdistus + nanopinnoitus', kalkinpoisto: 'Kalkinpoisto', nanopinnoitus: 'Nanopinnoitus' }
-    const radio = $(`input[name="palvelu"][value="${map[btn.dataset.select]}"]`)
-    if (radio) radio.checked = true
-  }))
-
   // ── tarjouslomake ────────────────────────────────────────
   $$('[data-quote-form]').forEach((form) => {
     const src = $('[data-source]', form)
