@@ -124,6 +124,7 @@ export function header(page) {
         <li><a class="nav-link" href="/#ennen-jalkeen">Ennen &amp; jälkeen</a></li>
         <li><a class="nav-link" href="/#tyotapa">Näin toimimme</a></li>
         <li><a class="nav-link" href="/#ukk">Kysymykset</a></li>
+        <li><a class="nav-link" href="/meista/"${current('/meista/')}>Meistä</a></li>
       </ul>
     </nav>
     <div class="header-actions">
@@ -146,6 +147,7 @@ export function header(page) {
       <li style="--i:3"><a href="/#ennen-jalkeen">Ennen &amp; jälkeen</a></li>
       <li style="--i:4"><a href="/#tyotapa">Näin toimimme</a></li>
       <li style="--i:5"><a href="/#ukk">Usein kysyttyä</a></li>
+      <li style="--i:6"><a href="/meista/"${current('/meista/')}>Meistä</a></li>
     </ul>
     <div class="mm-cta">
       <a class="btn btn-primary btn-lg" href="${ctaHref(page)}" data-close-menu>Pyydä maksuton tarjous ${icon.arrow}</a>
@@ -339,11 +341,11 @@ export function trustStrip() {
 
 // ── tarjouslomake (Netlify Forms) ───────────────────────────
 export const SERVICE_OPTIONS = [
-  ['nanopinnoitus', 'Kylpyhuoneen nanopinnoitus', '', 'Vettä hylkivä suoja suihkulaseille, laatoille ja hanoille'],
-  ['kokonaispaketti', 'Siivous + nanopinnoitus + suihkusuodatin', 'Suosituin', 'Perusteellinen puhdistus, nanopinnoitus ja kalkkia poistava suihkusuodatin'],
+  ['kalkinpoisto', 'Kalkinpoisto + syväpuhdistus', '', 'Kalkki pois ja koko kylpyhuone perusteellisesti puhtaaksi'],
+  ['nanopinnoitus', 'Syväpuhdistus + nanopinnoitus', 'Suosituin', 'Perusteellinen puhdistus ja vettä hylkivä nanosuoja pinnoille'],
 ]
 
-export function quoteForm({ selected = 'kokonaispaketti' } = {}) {
+export function quoteForm({ selected = 'nanopinnoitus' } = {}) {
   return `
 <form class="quote-form" name="tarjouspyynto" method="POST" action="/kiitos/" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" data-quote-form>
   <input type="hidden" name="form-name" value="tarjouspyynto">
@@ -354,6 +356,7 @@ export function quoteForm({ selected = 'kokonaispaketti' } = {}) {
     <div class="chip-row chip-options">
       ${SERVICE_OPTIONS.map(([v, l, badge, desc]) => `<label class="chip"><input type="radio" name="palvelu" value="${l}" required${v === selected ? ' checked' : ''}><span><b>${l}${badge ? ` <em>${badge}</em>` : ''}</b><small>${desc}</small></span></label>`).join('')}
     </div>
+    <label class="addon"><input type="checkbox" name="lisapalvelu" value="Kalkinsuodatin"><span><b>Lisäpalvelu: kalkinsuodatin</b><small>Kalkkia poistava suihkusuodatin asennettuna</small></span></label>
   </fieldset>
   <div class="form-row">
     <div class="field"><label for="f-nimi">Nimi <span aria-hidden="true">*</span></label><input id="f-nimi" name="nimi" type="text" autocomplete="name" required placeholder="Etunimi Sukunimi"></div>

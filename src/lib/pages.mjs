@@ -19,8 +19,8 @@ const homeFaq = [
 ]
 
 const packages = [
-  { tag: 'Suojaa pinnat', name: 'Kylpyhuoneen nanopinnoitus', text: 'Näkymätön, vettä hylkivä suoja, jonka ansiosta kalkki ja lika tarttuvat heikommin.', items: ['Pintojen esipuhdistus', 'Suihkulasien nanopinnoitus', 'Laattojen ja hanojen pinnoitus', 'Kirjalliset hoito-ohjeet'] },
-  { tag: 'Suosituin', name: 'Siivous + nanopinnoitus + suihkusuodatin', featured: true, text: 'Koko kylpyhuoneen perusteellinen siivous, kestävä nanosuojaus ja kalkkia poistava suihkusuodatin. Paras lopputulos ja helpoin arki.', items: ['Kalkinpoisto ja syväpuhdistus koko tilasta', 'Saumat, lattiakaivo, WC ja kalusteet', 'Nanopinnoitus soveltuville pinnoille', 'Kalkkia poistava suihkusuodatin asennettuna', 'Kirjalliset hoito-ohjeet'] },
+  { tag: 'Kalkki pois', name: 'Kalkinpoisto + syväpuhdistus', text: 'Pinttynyt kalkki ja lika pois koko kylpyhuoneesta. Pinnat ja saumat palautuvat raikkaiksi.', items: ['Kalkinpoisto suihkulaseista, hanoista ja laatoista', 'Syväpuhdistus koko tilasta', 'Saumat, lattiakaivo, WC ja kalusteet', 'Kirjalliset hoito-ohjeet'] },
+  { tag: 'Suosituin', name: 'Syväpuhdistus + nanopinnoitus', featured: true, text: 'Perusteellinen syväpuhdistus ja kestävä nanosuojaus, jonka ansiosta kalkki ja lika tarttuvat heikommin. Paras lopputulos ja helpoin arki.', items: ['Kalkinpoisto ja syväpuhdistus koko tilasta', 'Saumat, lattiakaivo, WC ja kalusteet', 'Nanopinnoitus soveltuville pinnoille', 'Kirjalliset hoito-ohjeet'] },
 ]
 
 function home() {
@@ -140,6 +140,7 @@ function home() {
         <ul>${p.items.map((it) => `<li>${icon.check}${it}</li>`).join('')}</ul>
       </article>`).join('')}
     </div>
+    <p class="addon-note reveal">${icon.plus}<span><strong>Lisäpalveluna kalkinsuodatin:</strong> kalkkia poistava suihkusuodatin asennettuna kumpaan tahansa pakettiin. Valitse se tarjouslomakkeelta.</span></p>
   </div>
 </section>
 ${processBlock()}
@@ -279,7 +280,7 @@ const cleaning = () => servicePage({
   ],
   contactTitle: 'Pyydä tarjous kylpyhuoneen puhdistuksesta',
   contactText: 'Kerro kylpyhuoneen koko ja mikä siinä eniten harmittaa. Saat kiinteän hinta-arvion kylpyhuoneen puhdistuksesta Kuopiossa – maksutta ja ilman sitoumuksia.',
-  formSelect: 'kokonaispaketti',
+  formSelect: 'nanopinnoitus',
 })
 
 // ══════════════════════════════════════════════════════════════
@@ -346,7 +347,7 @@ const descaling = () => servicePage({
   ],
   contactTitle: 'Pyydä tarjous kalkinpoistosta',
   contactText: 'Kerro, missä kalkkia on eniten – ja liitä mukaan kuva, jos voit. Saat kiinteän hinta-arvion kalkinpoistosta Kuopiossa nopeasti ja maksutta.',
-  formSelect: 'kokonaispaketti',
+  formSelect: 'kalkinpoisto',
 })
 
 // ══════════════════════════════════════════════════════════════
@@ -446,7 +447,7 @@ function quote() {
       <nav class="crumbs" aria-label="Murupolku"><ol><li><a href="/">Etusivu</a></li><li aria-current="page">Tarjouspyyntö</li></ol></nav>
       <p class="eyebrow eyebrow-light hero-in" style="--d:60ms">Maksuton &amp; sitoumukseton</p>
       <h1 id="page-title" class="hero-in" style="--d:140ms">Pyydä tarjous – <em>vie noin minuutin</em></h1>
-      <p class="hero-lead hero-in" style="--d:240ms">Kerro lyhyesti kylpyhuoneestasi. Valitse kylpyhuoneen nanopinnoitus tai kokonaispaketti (siivous, nanopinnoitus ja kalkkia poistava suihkusuodatin), niin lähetämme selkeän, kiinteän hinta-arvion.</p>
+      <p class="hero-lead hero-in" style="--d:240ms">Kerro lyhyesti kylpyhuoneestasi. Valitse kalkinpoisto ja syväpuhdistus tai syväpuhdistus ja nanopinnoitus – ja halutessasi lisäpalveluksi kalkinsuodatin – niin lähetämme selkeän, kiinteän hinta-arvion.</p>
       <ol class="mini-steps hero-in" style="--d:340ms">
         <li><span>1</span>Täytä lomake ja liitä kuva</li>
         <li><span>2</span>Saat kiinteän hinta-arvion</li>
@@ -516,6 +517,34 @@ const privacy = () => ({
 </section>`,
 })
 
+const about = () => ({
+  path: '/meista/',
+  title: 'Meistä – paikallinen savolainen yritys | NanoSavo',
+  description: 'NanoSavo on paikallinen savolainen yritys, joka tekee kylpyhuoneiden syväpuhdistusta ja nanopinnoitusta. Puhtaampia pintoja, vähemmän huolia.',
+  sitemap: { priority: '0.6', changefreq: 'yearly' },
+  schema: [localBusinessSchema(), breadcrumbSchema([HOME, { name: 'Meistä', path: '/meista/' }])],
+  body: `
+<section class="page-hero page-hero-sm" aria-labelledby="page-title">
+  <div class="page-hero-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Murupolku"><ol><li><a href="/">Etusivu</a></li><li aria-current="page">Meistä</li></ol></nav>
+    <p class="eyebrow eyebrow-light hero-in" style="--d:60ms">Meistä</p>
+    <h1 id="page-title" class="hero-in" style="--d:140ms">Puhtaampia kylpyhuoneita, <em>helpompaa arkea.</em></h1>
+    <p class="hero-lead hero-in" style="--d:240ms">NanoSavo syntyi yksinkertaisesta ajatuksesta: kylpyhuoneen puhtaanapidon ei pitäisi olla jatkuvaa taistelua kalkkia ja pinttynyttä likaa vastaan.</p>
+  </div>
+</section>
+<section class="section prose-section">
+  <div class="wrap prose">
+    <p>Huomasimme, kuinka haastavaa kylpyhuoneen pintojen puhtaana pitäminen voi olla. Erityisesti kalkkisaostumat, likaantuneet saumat ja suihkuseinät aiheuttavat monelle ylimääräistä työtä. Halusimme tarjota tähän toimivan ja vaivattoman ratkaisun.</p>
+    <p>Samalla NanoSavon perustaminen on meille pitkäaikaisen yrittäjyyshaaveen toteuttamista. Halusimme rakentaa oman yrityksen, jossa voimme tehdä asiat huolellisesti, pitää kiinni lupauksistamme ja nähdä oman työmme tulokset.</p>
+    <p>NanoSavon palveluiden ytimessä ovat kylpyhuoneiden perusteellinen syväpuhdistus ja nanopinnoitus. Tavoitteemme on palauttaa pintojen siisteys ja helpottaa niiden puhtaanapitoa myös tulevaisuudessa.</p>
+    <p>Olemme paikallinen savolainen yritys, ja meille tärkeintä on tyytyväinen asiakas, laadukas työnjälki ja luottamus.</p>
+    <p class="about-sign">NanoSavo – puhtaampia pintoja, vähemmän huolia.</p>
+  </div>
+</section>
+${contactSection()}`,
+})
+
 const notFound = () => ({
   path: '/404.html',
   out: '404.html',
@@ -536,4 +565,4 @@ const notFound = () => ({
 </section>`,
 })
 
-export const pages = () => [home(), cleaning(), descaling(), nano(), quote(), privacy(), thanks(), notFound()]
+export const pages = () => [home(), cleaning(), descaling(), nano(), quote(), about(), privacy(), thanks(), notFound()]
